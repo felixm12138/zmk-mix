@@ -1,6 +1,6 @@
 file_format: "1"
-id: cornepad
-name: cornepad
+id: mix
+name: mix
 type: shield
 url: https://github.com/felixm12138/cornepad
 requires: [pro_micro]
@@ -10,5 +10,5 @@ features:
   - display
   - studio
 siblings:
-  - cornepad_left
-  - cornepad_right
+  - mix_left
+  - mix_right

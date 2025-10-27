@@ -1,6 +1,6 @@
 # No whitespace after the comma or in your keyboard name!
-config SHIELD_CORNEPAD_LEFT
-    def_bool $(shields_list_contains,cornepad_left)
+config SHIELD_MIX_LEFT
+    def_bool $(shields_list_contains,mix_left)
 
-config SHIELD_CORNEPAD_RIGHT
-    def_bool $(shields_list_contains,cornepad_right)
+config SHIELD_MIX_RIGHT
+    def_bool $(shields_list_contains,mix_right)

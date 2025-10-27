@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include "cornepad.dtsi"
+#include "mix.dtsi"
 
 #include <dt-bindings/zmk/outputs.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
@@ -120,7 +120,7 @@
     glidepoint: glidepoint@0 {
         compatible = "cirque,pinnacle";
         reg = <0>;
-        spi-max-frequency = <1000000>;
+        spi-max-frequency = <4000000>;
         status = "okay";
         dr-gpios = <&gpio1 04 (GPIO_ACTIVE_HIGH)>;
 
