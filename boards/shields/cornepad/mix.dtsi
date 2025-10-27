@@ -5,7 +5,7 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <mix_layout.dtsi>
+#include <mixlayout.dtsi>
 
 #include <dt-bindings/led/led.h>
 
