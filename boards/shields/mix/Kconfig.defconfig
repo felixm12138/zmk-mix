@@ -1,4 +1,4 @@
-if SHIELD_CORNEPAD_RIGHT
+if SHIELD_MIX_RIGHT
 
 config ZMK_KEYBOARD_NAME
     default "mix"
