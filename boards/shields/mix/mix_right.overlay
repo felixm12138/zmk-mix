@@ -143,4 +143,6 @@
             <&zip_scroll_scaler 1 6>;
     }; // end scroller
 };
-
+&right_encoder {
+    status = "okay";
+};
