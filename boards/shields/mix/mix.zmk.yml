@@ -2,7 +2,7 @@ file_format: "1"
 id: mix
 name: mix
 type: shield
-url: https://github.com/felixm12138/cornepad
+url: https://github.com/felixm12138/mix
 requires: [pro_micro]
 exposes: [i2c_oled]
 features:
