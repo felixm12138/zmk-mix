@@ -12,10 +12,12 @@
 / {
     behaviors {
         mouse_scroll: mouse_scroll {
-            compatible = "zmk,behavior-sensor-rotate-var";
+            compatible = "zmk,behavior-sensor-rotate";
             label = "MOUSE_SCROLL";
-            #sensor-binding-cells = <2>;
-            bindings = <&msc>, <&msc>;
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+
+            tap-ms = <20>;
         };
     };
 
@@ -59,9 +61,7 @@
 &kp LCTRL   &kp C_MUTE          &kp LGUI  &mo 1         &kp SPACE  &kp RET       &mo 2   &kp RALT            &lt 3 SPACE    &kp RCTRL
             >;
 
-            sensor-bindings =
-                <&inc_dec_kp C_VOL_UP C_VOL_DN>,
-                <&mouse_scroll SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&mouse_scroll>;
         };
 
         lower_layer {
