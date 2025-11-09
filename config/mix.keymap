@@ -83,7 +83,9 @@
 &kp LSHFT  &kp Z         &kp LGUI  &mo 1  &kp SPACE  &kp RET  &mo 2  &kp RALT            &kp LSHFT  &kp Z
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&none>;
+            sensor-bindings =
+                <&inc_dec_kp C_VOL_UP C_VOL_DN>,
+                <&ms SCRL_UP SCRL_DOWN>;
         };
 
         layer_3 {
