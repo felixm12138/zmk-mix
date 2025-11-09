@@ -16,8 +16,6 @@
             label = "MS";
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
-
-            tap-ms = <0>;
         };
     };
 
