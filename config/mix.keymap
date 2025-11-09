@@ -58,7 +58,7 @@
 &kp LCTRL   &kp C_MUTE          &kp LGUI  &mo 1         &kp SPACE  &kp RET       &mo 2   &kp RALT            &lt 3 SPACE    &kp RCTRL
             >;
 
-            sensor-bindings = <&ms SCRL_UP SCRL_DOWN>, &ms SCRL_UP SCRL_DOWN>;
+            sensor-bindings = <&ms SCRL_UP SCRL_DOWN &ms SCRL_UP SCRL_DOWN>;
         };
 
         lower_layer {
@@ -83,8 +83,8 @@
             >;
 
             sensor-bindings =
-                <&inc_dec_kp C_VOL_UP C_VOL_DN>,
-                <&ms SCRL_UP SCRL_DOWN>;
+                <&inc_dec_kp C_VOL_UP C_VOL_DN
+                &ms SCRL_UP SCRL_DOWN>;
         };
 
         layer_3 {
