@@ -16,7 +16,7 @@
         ms: ms {
             compatible = "zmk,behavior-sensor-rotate-var";
             label = "MS";
-            #sensor-binding-cells = <2>;
+            sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
 
             tap-ms = <0>;
