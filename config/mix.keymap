@@ -8,14 +8,14 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
-#define ZMK_MOUSE_SCRL_VAL 1400
+#define ZMK_MOUSE_SCRL_VAL 400
 / {
     behaviors {
         ms: sensor_rotate_kp {
             compatible = "zmk,behavior-sensor-rotate-var";
             #sensor-binding-cells = <2>;
             bindings = <&msc>, <&msc>;
-            tap-ms = <50>;
+            tap-ms = <100>;
         };
     };
 
