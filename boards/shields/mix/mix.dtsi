@@ -72,7 +72,7 @@ RC(4,0) RC(4,1)         RC(4,3) RC(4,4) RC(4,5)  RC(4,6) RC(4,7) RC(4,8)        
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&left_encoder &right_encoder>;
-        triggers-per-rotation = <20>;
+        triggers-per-rotation = <48>;
     };
 };
 
