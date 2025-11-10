@@ -1,9 +1,12 @@
 #include <physical_layouts.dtsi>
 
 / {
-    mix_layout: mix_layout {
+    physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "default";
+
+        kscan = <&kscan0>;
+        transform = <&matrix_transform0>;
 
         keys  //                     w   h    x    y     rot    rx    ry
             = <&key_physical_attrs 100 100    0   25       0     0     0>
@@ -57,10 +60,10 @@
             , <&key_physical_attrs 125 100    0  425       0     0     0>
             , <&key_physical_attrs 200 100  125  425       0     0     0>
             , <&key_physical_attrs 100 100  400  425       0     0     0>
-            , <&key_physical_attrs 100 100  570  350     800     0     0>
-            , <&key_physical_attrs 125 100  720  265    1500     0     0>
-            , <&key_physical_attrs 125 100  676  672 (-1500)     0     0>
-            , <&key_physical_attrs 100 100  890  570  (-800)     0     0>
+            , <&key_physical_attrs 100 100  505  450     800     0     0>
+            , <&key_physical_attrs 125 100  625  465    1500     0     0>
+            , <&key_physical_attrs 125 100  825  465 (-1500)     0     0>
+            , <&key_physical_attrs 100 100  970  450  (-800)     0     0>
             , <&key_physical_attrs 100 100 1075  425       0     0     0>
             , <&key_physical_attrs 200 100 1250  425       0     0     0>
             , <&key_physical_attrs 125 100 1450  425       0     0     0>
