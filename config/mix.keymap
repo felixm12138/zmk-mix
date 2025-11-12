@@ -21,6 +21,15 @@
 
             tap-ms = <300>;
         };
+
+        mscroll2: mscroll2 {
+            compatible = "zmk,behavior-sensor-rotate-var";
+            label = "MSCROLL2";
+            #sensor-binding-cells = <2>;
+            bindings = <&msc>, <&msc>;
+
+            tap-ms = <500>;
+        };
     };
 
     combos {
@@ -39,6 +48,26 @@
         password {
             bindings = <&password>;
             key-positions = <52 53>;
+        };
+
+        up {
+            bindings = <&kp UP_ARROW>;
+            key-positions = <26 14>;
+        };
+
+        left {
+            bindings = <&kp LEFT>;
+            key-positions = <26 25>;
+        };
+
+        right {
+            bindings = <&kp RIGHT_ARROW>;
+            key-positions = <26 27>;
+        };
+
+        down {
+            bindings = <&kp DOWN_ARROW>;
+            key-positions = <26 38>;
         };
     };
 
@@ -64,8 +93,8 @@
             >;
 
             sensor-bindings =
-                <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>,
-                <&mscroll>;
+                <&mscroll2 SCRL_LEFT SCRL_RIGHT>,
+                <&mscroll2 SCRL_UP SCRL_DOWN>;
         };
 
         lower_layer {
