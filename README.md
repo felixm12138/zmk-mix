@@ -1,6 +1,6 @@
 # MIX ZMK Firmware
 
-![MIX Keyboard Main Image](assets/mix-main.svg)
+![MIX Keyboard Main Image](assets/mix-main.jpg)
 
 ![Keyboard](https://img.shields.io/badge/Keyboard-MIX-black)
 ![Firmware](https://img.shields.io/badge/Firmware-ZMK-blue)
