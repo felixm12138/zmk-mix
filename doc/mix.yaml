@@ -1,6 +1,6 @@
 layout: {zmk_keyboard: mix}
 layers:
-  Defualt:
+  Default:
   - ESCAPE
   - '1'
   - '2'
@@ -59,7 +59,7 @@ layers:
   - layer 2
   - LEFT WIN
   - RIGHT ALT
-  - {t: SPACE, h: Buleth}
+  - {t: SPACE, h: BT}
   - RCTRL
   layer 1:
   - F12
@@ -183,7 +183,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  Buleth:
+  BT:
   - BT CLR
   - {t: BT, h: '0'}
   - {t: BT, h: '1'}
