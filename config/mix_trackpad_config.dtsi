@@ -1,0 +1,22 @@
+/*
+ * Tunable parameters for Mix keyboard trackpad configuration.
+ * Adjust these values to change mouse and scroll behavior.
+ *
+ * Format: NUMERATOR / DENOMINATOR
+ *   Higher ratio = faster movement
+ *   Lower ratio = slower, more precise movement
+ */
+
+/* Scroll layers: which layers activate scroll mode */
+#define MIX_SCROLL_LAYERS 1 2
+
+/* Cirque ADC attenuation: "1x" (driver default, most sensitive) .. "4x" (least sensitive) */
+#define MIX_CIRQUE_SENSITIVITY "2x"
+
+/* Mouse pointer speed: 5/2 (@1x default), 5/2 (@2x fast), 3/1 (very fast) */
+#define MIX_MOUSE_SPEED_NUM 5
+#define MIX_MOUSE_SPEED_DEN 2
+
+/* Scroll speed: 1/6 (default @1x), 1/30 (@2x slow), 1/20 (@2x medium) */
+#define MIX_SCROLL_SPEED_NUM 1
+#define MIX_SCROLL_SPEED_DEN 30

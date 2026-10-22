@@ -9,7 +9,7 @@ manifest:
     revision: v0.3
     import: app/west.yml
   - name: cirque-input-module
-    url: https://github.com/petejohanson/cirque-input-module
+    url: https://github.com/geeksville/cirque-input-module
     revision: main
     path: modules/cirque-input-module
   self:

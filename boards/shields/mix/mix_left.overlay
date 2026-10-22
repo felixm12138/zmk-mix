@@ -6,23 +6,6 @@
 
 #include "mix.dtsi"
 
-
-#include <dt-bindings/led/led.h>
-&pinctrl {
-    spi3_default: spi3_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
-        };
-    };
-    spi3_sleep: spi3_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
-            low-power-enable;
-        };
-    };
-};
-
-
 &kscan0 {
     col-gpios
         = <&pro_micro 21 GPIO_ACTIVE_HIGH>
@@ -32,30 +15,6 @@
         , <&pro_micro 15 GPIO_ACTIVE_HIGH>
         , <&pro_micro 14 GPIO_ACTIVE_HIGH>
         ;
-};
-
-&pro_micro_spi {
-    status = "okay";
-    cs-gpios = <&gpio0 24 GPIO_ACTIVE_LOW>;
-
-    glidepoint: glidepoint@0 {
-        compatible = "cirque,pinnacle";
-        reg = <0>;
-        spi-max-frequency = <1000000>;
-        status = "okay";
-        dr-gpios = <&gpio1 04 (GPIO_ACTIVE_HIGH)>;
-
-        sensitivity = "2x";
-        //invert-x;
-        sleep;
-        // no-taps;
-    };
-};
-/ {
-    glidepoint_listener: glidepoint_listener {
-        compatible = "zmk,input-listener";
-        status = "disabled";
-    };
 };
 
 &left_encoder {

@@ -26,10 +26,10 @@ Contact: [cube_studio@qq.com](mailto:cube_studio@qq.com)
 * Built for **nice!nano v2** controllers
 * Split-half targets: `mix_left` and `mix_right`
 * ZMK Studio enabled for visual keymap editing / runtime configuration support
-* Pointing-device and mouse support for Cirque-style trackpad integration
+* Cirque trackpad on the right half (geeksville driver: level-triggered IRQ, chip shutdown in deep sleep)
 * EC11 rotary encoder support
 * Bluetooth profile management layer
-* Sleep and idle timeout configuration for wireless use
+* Idle after 7.5 min, deep sleep after 15 min
 * Official store: [cubekb.net](https://cubekb.net)
 * Contact email: [cube_studio@qq.com](mailto:cube_studio@qq.com)
 * Community support via QQ group: **1037094476**
@@ -40,8 +40,8 @@ Contact: [cube_studio@qq.com](mailto:cube_studio@qq.com)
 
 | Branch | Description |
 | --- | --- |
-| [`main`](../../tree/main) | No display — keys, Cirque trackpad, encoders, ZMK Studio / 无屏幕版本 |
-| [`nice_view`](../../tree/nice_view) | nice!view screen on the left half (nice_view_gem, relay screen art) / 左手 nice!view 屏幕版本 |
+| [`main`](../../tree/main) | No display — keys, Cirque trackpad, encoders, ZMK Studio. Lowest power; use this if no screen is fitted / 无屏幕版本，未焊屏幕请用此分支 |
+| [`nice_view`](../../tree/nice_view) | Same as `main` plus a nice!view screen on the left half (battery of both halves, BT profile, layer, Caps Lock) / 在 main 基础上增加左手 nice!view 屏幕 |
 | [`without-touchpad`](../../tree/without-touchpad) | Build without the Cirque trackpad / 无触控板版本 |
 
 ---
@@ -67,7 +67,7 @@ The current keymap includes four main layers:
 | `LAYER0` | `Default`    | Main typing layer                         |
 | `LAYER1` | `layer 1`    | Function keys and brackets                |
 | `LAYER2` | `layer 2`    | Symbols and shifted number-row characters |
-| `LAYER3` | `Bluetooth`  | Bluetooth profile selection and clearing  |
+| `LAYER3` | `BT`         | Bluetooth profile selection and clearing  |
 
 ### Default Layer Highlights
 
@@ -92,49 +92,68 @@ The current keymap includes four main layers:
 ```text
 .
 ├── build.yaml              # GitHub Actions build matrix
+├── boards/shields/mix/     # MIX shield: matrix, encoders, Cirque trackpad
 ├── config/
-│   ├── west.yml            # ZMK and external module manifest
-│   ├── mix.conf            # Runtime/build configuration
-│   └── mix.keymap          # Keymap layers, combos, and sensor bindings
+│   ├── west.yml                  # ZMK and external module manifest
+│   ├── mix.conf                  # Shared config (encoder, sleep, Bluetooth)
+│   ├── mix_right.conf            # Right half (central): trackpad, ZMK Studio
+│   ├── mix_trackpad_config.dtsi  # Trackpad tuning: sensitivity, pointer/scroll speed
+│   └── mix.keymap                # Keymap layers, combos, and sensor bindings
 └── README.md
 ```
 
 External modules currently referenced by `west.yml`:
 
 * `zmkfirmware/zmk` at `v0.3`
-* `petejohanson/cirque-input-module`
+* `geeksville/cirque-input-module` (fork of `petejohanson/cirque-input-module`)
 
 ---
 
 ## Firmware Configuration
 
-Main options enabled in `config/mix.conf`:
+Shared options in `config/mix.conf`:
 
 ```conf
-CONFIG_ZMK_STUDIO=y
-CONFIG_ZMK_STUDIO_LOCKING=n
-CONFIG_ZMK_STUDIO_LOCK_ON_DISCONNECT=n
-
 CONFIG_EC11=y
 CONFIG_EC11_TRIGGER_GLOBAL_THREAD=y
 
-CONFIG_ZMK_POINTING=y
-CONFIG_ZMK_MOUSE=y
-
+CONFIG_ZMK_IDLE_TIMEOUT=450000         # idle after 7.5 min
 CONFIG_ZMK_SLEEP=y
-CONFIG_ZMK_IDLE_TIMEOUT=450000
-CONFIG_ZMK_IDLE_SLEEP_TIMEOUT=1800000
+CONFIG_ZMK_IDLE_SLEEP_TIMEOUT=900000   # deep sleep after 15 min
 
 CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
 CONFIG_ZMK_BLE_EXPERIMENTAL_CONN=y
 ```
+
+Right half (central) options in `config/mix_right.conf`:
+
+```conf
+CONFIG_ZMK_POINTING=y
+CONFIG_ZMK_MOUSE=y
+CONFIG_INPUT_THREAD_STACK_SIZE=2048
+
+CONFIG_ZMK_STUDIO=y
+CONFIG_ZMK_STUDIO_LOCKING=n
+CONFIG_ZMK_STUDIO_LOCK_ON_DISCONNECT=n
+```
+
+### Trackpad tuning
+
+Edit `config/mix_trackpad_config.dtsi`:
+
+| Define | Default | Meaning |
+| --- | --- | --- |
+| `MIX_CIRQUE_SENSITIVITY` | `"2x"` | ADC attenuation, `"1x"` most sensitive … `"4x"` least |
+| `MIX_MOUSE_SPEED_NUM / DEN` | `5 / 2` | Pointer speed multiplier |
+| `MIX_SCROLL_SPEED_NUM / DEN` | `1 / 30` | Scroll speed multiplier (raise, e.g. `1 / 10`, for faster scrolling) |
+| `MIX_SCROLL_LAYERS` | `1 2` | Layers on which the trackpad scrolls instead of moving the pointer |
 
 ---
 
 ## Building Firmware with GitHub Actions
 
 1. Fork or clone this repository.
-2. Edit `config/mix.keymap` or `config/mix.conf` as needed.
+2. Edit `config/mix.keymap`, `config/mix.conf` or `config/mix_trackpad_config.dtsi` as needed.
 3. Commit and push your changes to GitHub.
 4. Open the **Actions** tab in this repository.
 5. Wait for the ZMK build workflow to finish.
@@ -217,6 +236,6 @@ This repository is a keyboard firmware configuration based on the ZMK ecosystem.
 The following upstream projects and modules are used or referenced by this firmware configuration:
 
 * **ZMK Firmware**: [zmkfirmware/zmk](https://github.com/zmkfirmware/zmk)
-* **Cirque trackpad input module**: [petejohanson/cirque-input-module](https://github.com/petejohanson/cirque-input-module)
+* **Cirque trackpad input module**: [geeksville/cirque-input-module](https://github.com/geeksville/cirque-input-module) (fork of [petejohanson/cirque-input-module](https://github.com/petejohanson/cirque-input-module))
 
 Please refer to each upstream project for its original license, documentation, and usage requirements.

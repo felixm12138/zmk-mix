@@ -1,0 +1,26 @@
+/*
+ * Cirque trackpad input listener configuration for Mix keyboard.
+ * Included by mix_right.overlay (central half with Cirque trackpad).
+ */
+
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+
+/ {
+    glidepoint_listener: glidepoint_listener {
+        compatible = "zmk,input-listener";
+        device = <&glidepoint>;
+        status = "okay";
+        input-processors =
+            <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,
+            <&zip_xy_scaler MIX_MOUSE_SPEED_NUM MIX_MOUSE_SPEED_DEN>;
+
+        scroller {
+            layers = <MIX_SCROLL_LAYERS>;
+            input-processors =
+                <&zip_xy_to_scroll_mapper>,
+                <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>,
+                <&zip_scroll_scaler MIX_SCROLL_SPEED_NUM MIX_SCROLL_SPEED_DEN>;
+        };
+    };
+};

@@ -5,11 +5,11 @@
  */
 
 #include "mix.dtsi"
+#include "../../../config/mix_trackpad_config.dtsi"
+#include "mix_trackpad.dtsi"
 
 #include <dt-bindings/zmk/outputs.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h>
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/pointing.h>
 
@@ -62,6 +62,8 @@
     status = "okay";
     cs-gpios = <&gpio0 24 GPIO_ACTIVE_LOW>;
 
+    // geeksville/cirque-input-module driver (ZMK v0.3 compatible):
+    // https://github.com/geeksville/cirque-input-module
     glidepoint: glidepoint@0 {
         compatible = "cirque,pinnacle";
         reg = <0>;
@@ -69,27 +71,11 @@
         status = "okay";
         dr-gpios = <&gpio1 04 (GPIO_ACTIVE_HIGH)>;
 
-        sensitivity = "1x";
-        //sleep;
-        // no-taps;
+        // ADC sensitivity: "1x", "2x", "3x", "4x" (driver default "1x"; 1x = most sensitive, 4x = least)
+        sensitivity = MIX_CIRQUE_SENSITIVITY;
+        // sleep;       // disabled — trackpad stays always-on
+        // no-taps;     // disable tap-to-click (taps enabled by default)
     };
-};
-
-/ {
-    glidepoint_listener {
-        compatible = "zmk,input-listener";
-        device = <&glidepoint>;
-        input-processors = 
-        <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,
-        <&zip_xy_scaler 5 2>;
-          scroller {
-        layers = <1 2>;
-        input-processors =
-            <&zip_xy_to_scroll_mapper>,
-            <&zip_scroll_transform (INPUT_TRANSFORM_X_INVERT)>,
-            <&zip_scroll_scaler 1 6>;
-        };
-    }; 
 };
 
 &right_encoder {
