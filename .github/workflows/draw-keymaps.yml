@@ -5,7 +5,7 @@ on:
   push:               # automatically run on changes to following paths
     paths:
       - "config/mix.keymap"
-      - "board/shields/mix/mixlayout.dtsi"
+      - "boards/shields/mix/mixlayout.dtsi"
       - "keymap_drawer.config.yaml"
       # - 'boards/*/*/*.keymap'
 
