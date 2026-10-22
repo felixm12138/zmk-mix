@@ -71,6 +71,7 @@ Requires a [nice!view](https://nicekeyboards.com/nice-view) fitted on the **left
 | 底部 Bottom | 5 个蓝牙配置（实心为当前）、当前层名 / 5 BT profile slots (filled = active), current layer name |
 
 * 屏幕只在状态变化时刷新，状态转发不增加额外蓝牙通信 / The screen redraws only on state changes; relaying adds no extra Bluetooth traffic.
+* 左手闲置 7.5 分钟后停止刷新以省电，画面保留最后一帧；按左手任意键或转动左旋钮即恢复 / After 7.5 min without left-half input the screen stops refreshing to save power and keeps the last frame; any left-half key or encoder turn resumes it.
 * 未焊屏幕时请使用 `main` 分支，否则左手会白白多耗电 / Without a screen, use `main` — the display firmware still runs and costs battery.
 * 屏幕界面代码位于 `boards/shields/nice_view_gem/`，可自行修改 / Screen layout lives in `boards/shields/nice_view_gem/` and can be customized.
 
@@ -183,6 +184,7 @@ Left half (peripheral, display) — `config/mix_left.conf`:
 CONFIG_ZMK_DISPLAY=y
 CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=y
 CONFIG_NICE_VIEW_GEM_PERIPHERAL_CENTRAL_RELAY=y
+CONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=y   # stop refreshing while idle (keeps last frame)
 ```
 
 ### Build targets
