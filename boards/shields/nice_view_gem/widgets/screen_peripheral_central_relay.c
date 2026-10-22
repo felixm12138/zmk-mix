@@ -41,10 +41,12 @@ LV_IMG_DECLARE(bt_unbonded);
 LV_IMG_DECLARE(bt);
 LV_IMG_DECLARE(usb);
 LV_IMG_DECLARE(bolt);
-LV_IMG_DECLARE(profiles);
 LV_IMG_DECLARE(middle_art_rotated);
 
 #define MIDDLE_ART_DISPLAY_WIDTH 25
+
+/* Caps Lock bit in the HID keyboard LED report (usage 0x02 -> bit 1) */
+#define HID_IND_CAPS_LOCK BIT(1)
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -178,10 +180,47 @@ static void draw_not_connected_label(lv_obj_t *canvas) {
 /* --- BOTTOM: profile dots without active selection --- */
 
 static void draw_profiles_no_active(lv_obj_t *canvas) {
-    lv_draw_img_dsc_t img_dsc;
-    lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 18, 129 + BUFFER_OFFSET_BOTTOM, &profiles, &img_dsc);
-    /* No active dot drawn — all dots appear inactive */
+    draw_profiles_row(canvas, -1); /* all slots inactive */
+}
+
+/* --- MIDDLE: Caps Lock badge (small rounded box below MIX art) --- */
+
+#define CAPS_GLYPH_W 5
+#define CAPS_GLYPH_H 7
+#define CAPS_PAD_X 3
+#define CAPS_PAD_Y 3
+#define CAPS_RADIUS 3
+#define CAPS_W (4 * CAPS_GLYPH_W + 3 + 2 * CAPS_PAD_X) /* 29 */
+#define CAPS_H (CAPS_GLYPH_H + 2 * CAPS_PAD_Y)         /* 13 */
+/* Lowest spot in the middle canvas: centred between MIX art and profile dots */
+#define CAPS_Y0 (BUFFER_SIZE - 1 - CAPS_H)
+
+static const char *const caps_glyphs[4][CAPS_GLYPH_H] = {
+    {".###.", "#...#", "#....", "#....", "#....", "#...#", ".###."}, /* C */
+    {".###.", "#...#", "#...#", "#####", "#...#", "#...#", "#...#"}, /* A */
+    {"####.", "#...#", "#...#", "####.", "#....", "#....", "#...."}, /* P */
+    {".###.", "#...#", "#....", ".###.", "....#", "#...#", ".###."}, /* S */
+};
+
+static void draw_caps_badge(lv_obj_t *canvas) {
+    int x0 = (BUFFER_SIZE - CAPS_W) / 2;
+
+    lv_draw_rect_dsc_t rect_dsc;
+    init_rect_dsc(&rect_dsc, LVGL_FOREGROUND);
+    rect_dsc.radius = CAPS_RADIUS;
+    lv_canvas_draw_rect(canvas, x0, CAPS_Y0, CAPS_W, CAPS_H, &rect_dsc);
+
+    for (int g = 0; g < 4; g++) {
+        int gx = x0 + CAPS_PAD_X + g * (CAPS_GLYPH_W + 1);
+        for (int r = 0; r < CAPS_GLYPH_H; r++) {
+            for (int c = 0; c < CAPS_GLYPH_W; c++) {
+                if (caps_glyphs[g][r][c] == '#') {
+                    lv_canvas_set_px_color(canvas, gx + c, CAPS_Y0 + CAPS_PAD_Y + r,
+                                           LVGL_BACKGROUND);
+                }
+            }
+        }
+    }
 }
 
 /*
@@ -201,6 +240,17 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
     /* Right column: central relay status */
     draw_central_relay_conn_icon(canvas, state);
     draw_central_relay_battery(canvas, state);
+
+    rotate_canvas(canvas, cbuf);
+}
+
+static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
+    lv_obj_t *canvas = lv_obj_get_child(widget, 1);
+    fill_background(canvas);
+
+    if (state->connected && state->central_relay_received && state->caps_lock) {
+        draw_caps_badge(canvas);
+    }
 
     rotate_canvas(canvas, cbuf);
 }
@@ -283,6 +333,7 @@ static void set_connection_status(struct zmk_widget_screen *widget,
     }
 
     draw_top(widget->obj, widget->cbuf, &widget->state);
+    draw_middle(widget->obj, widget->cbuf2, &widget->state);
     draw_bottom(widget->obj, widget->cbuf3, &widget->state);
 }
 
@@ -310,6 +361,7 @@ struct central_relay_state {
     int profile_index;
     uint8_t layer_index;
     const char *layer_label;
+    bool caps_lock;
 };
 
 static void set_central_relay_status(struct zmk_widget_screen *widget,
@@ -325,8 +377,10 @@ static void set_central_relay_status(struct zmk_widget_screen *widget,
     widget->state.active_profile_index = state.profile_index;
     widget->state.layer_index = state.layer_index;
     widget->state.layer_label = state.layer_label;
+    widget->state.caps_lock = state.caps_lock;
 
     draw_top(widget->obj, widget->cbuf, &widget->state);
+    draw_middle(widget->obj, widget->cbuf2, &widget->state);
     draw_bottom(widget->obj, widget->cbuf3, &widget->state);
 }
 
@@ -348,6 +402,7 @@ static struct central_relay_state central_relay_get_state(const zmk_event_t *_eh
         .profile_index = csr_cache_get_active_profile(),
         .layer_index = csr_cache_get_active_layer(),
         .layer_label = csr_cache_get_layer_name(),
+        .caps_lock = csr_cache_get_hid_indicators() & HID_IND_CAPS_LOCK,
     };
 }
 
@@ -372,9 +427,8 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     lv_obj_t *middle = lv_canvas_create(widget->obj);
     lv_obj_align(middle, LV_ALIGN_TOP_RIGHT, BUFFER_OFFSET_MIDDLE, 0);
     lv_canvas_set_buffer(middle, widget->cbuf2, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
-    /* Fill middle canvas once — reserved for future use, no redraw needed */
-    fill_background(middle);
-    rotate_canvas(middle, widget->cbuf2);
+    /* Middle canvas: Caps Lock badge, redrawn on relay/connection updates */
+    draw_middle(widget->obj, widget->cbuf2, &widget->state);
 
     lv_obj_t *bottom = lv_canvas_create(widget->obj);
     lv_obj_align(bottom, LV_ALIGN_TOP_RIGHT, BUFFER_OFFSET_BOTTOM, 0);

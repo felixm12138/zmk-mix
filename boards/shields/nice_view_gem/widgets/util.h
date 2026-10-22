@@ -40,6 +40,7 @@ struct status_state {
     int active_profile_index;
     uint8_t layer_index;
     const char *layer_label;
+    bool caps_lock; /* host Caps Lock LED, relayed from central */
 #endif
 #endif
 };
