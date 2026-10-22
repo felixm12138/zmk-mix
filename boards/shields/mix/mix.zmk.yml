@@ -4,10 +4,8 @@ name: mix
 type: shield
 url: https://github.com/felixm12138/mix
 requires: [pro_micro]
-exposes: [i2c_oled]
 features:
   - keys
-  - display
   - studio
 siblings:
   - mix_left

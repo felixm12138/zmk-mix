@@ -8,12 +8,12 @@
 ![Studio](https://img.shields.io/badge/ZMK%20Studio-enabled-purple)
 
 **MIX** is a wireless split low-profile keyboard project by **CUBE_STUDIO**.
-This repository contains the ZMK firmware configuration for MIX, including split-half builds, display support, pointing-device support, encoder support, Bluetooth profiles, and ZMK Studio configuration.
+This repository contains the ZMK firmware configuration for MIX, including split-half builds, pointing-device support, encoder support, Bluetooth profiles, and ZMK Studio configuration.
 
 Official store: [cubekb.net](https://cubekb.net)
 Contact: [cube_studio@qq.com](mailto:cube_studio@qq.com)
 
-中文简介：本仓库是 **CUBE_STUDIO MIX 无线分体矮轴键盘** 的 ZMK 固件配置仓库，用于生成左右手固件、配置按键层、显示屏、触控板/指针设备、旋钮以及蓝牙连接相关功能。
+中文简介：本仓库是 **CUBE_STUDIO MIX 无线分体矮轴键盘** 的 ZMK 固件配置仓库，用于生成左右手固件、配置按键层、触控板/指针设备、旋钮以及蓝牙连接相关功能。
 
 购买地址：[cubekb.net](https://cubekb.net)
 联系邮箱：[cube_studio@qq.com](mailto:cube_studio@qq.com)
@@ -25,7 +25,6 @@ Contact: [cube_studio@qq.com](mailto:cube_studio@qq.com)
 * Wireless split keyboard firmware based on **ZMK**
 * Built for **nice!nano v2** controllers
 * Split-half targets: `mix_left` and `mix_right`
-* Display support with `nice_view_adapter` and `nice_epaper`
 * ZMK Studio enabled for visual keymap editing / runtime configuration support
 * Pointing-device and mouse support for Cirque-style trackpad integration
 * EC11 rotary encoder support
@@ -37,13 +36,23 @@ Contact: [cube_studio@qq.com](mailto:cube_studio@qq.com)
 
 ---
 
+## Branches / 分支
+
+| Branch | Description |
+| --- | --- |
+| [`main`](../../tree/main) | No display — keys, Cirque trackpad, encoders, ZMK Studio / 无屏幕版本 |
+| [`nice_view`](../../tree/nice_view) | nice!view screen on the left half (nice_view_gem, relay screen art) / 左手 nice!view 屏幕版本 |
+| [`without-touchpad`](../../tree/without-touchpad) | Build without the Cirque trackpad / 无触控板版本 |
+
+---
+
 ## Build Targets
 
 The current `build.yaml` generates the following firmware targets:
 
 | Target         | Board          | Shield / Snippet                         | Notes                                           |
 | -------------- | -------------- | ---------------------------------------- | ----------------------------------------------- |
-| Left half      | `nice_nano_v2` | `mix_left nice_view_adapter nice_epaper` | Left-side firmware with display stack           |
+| Left half      | `nice_nano_v2` | `mix_left`                               | Left-side firmware (no display)                 |
 | Right half     | `nice_nano_v2` | `mix_right` + `studio-rpc-usb-uart`      | Right-side firmware with ZMK Studio RPC enabled |
 | Settings reset | `nice_nano_v2` | `settings_reset`                         | Used to clear stored ZMK settings               |
 
@@ -94,7 +103,6 @@ External modules currently referenced by `west.yml`:
 
 * `zmkfirmware/zmk` at `v0.3`
 * `petejohanson/cirque-input-module`
-* `mctechnology17/zmk-nice-oled`
 
 ---
 
@@ -112,9 +120,6 @@ CONFIG_EC11_TRIGGER_GLOBAL_THREAD=y
 
 CONFIG_ZMK_POINTING=y
 CONFIG_ZMK_MOUSE=y
-
-CONFIG_ZMK_DISPLAY=y
-CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=y
 
 CONFIG_ZMK_SLEEP=y
 CONFIG_ZMK_IDLE_TIMEOUT=450000
@@ -190,9 +195,9 @@ Use ZMK Studio to inspect or adjust supported runtime keymap features through a 
 ## Notes
 
 * This repository is intended for MIX keyboard firmware development and customization.
-* Hardware revisions may require matching shield, pin, display, and pointing-device configuration.
+* Hardware revisions may require matching shield, pin, and pointing-device configuration.
 * If Bluetooth pairing behaves unexpectedly, flash `settings_reset` and pair again.
-* If the display, encoder, or trackpad does not work, check the shield overlay and module versions first.
+* If the encoder or trackpad does not work, check the shield overlay and module versions first.
 
 ---
 
@@ -212,7 +217,6 @@ This repository is a keyboard firmware configuration based on the ZMK ecosystem.
 The following upstream projects and modules are used or referenced by this firmware configuration:
 
 * **ZMK Firmware**: [zmkfirmware/zmk](https://github.com/zmkfirmware/zmk)
-* **nice!view / nice!oled related module**: [mctechnology17/zmk-nice-oled](https://github.com/mctechnology17/zmk-nice-oled)
 * **Cirque trackpad input module**: [petejohanson/cirque-input-module](https://github.com/petejohanson/cirque-input-module)
 
 Please refer to each upstream project for its original license, documentation, and usage requirements.

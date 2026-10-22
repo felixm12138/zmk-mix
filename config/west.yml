@@ -2,10 +2,7 @@ manifest:
   remotes:
   - name: zmkfirmware
     url-base: https://github.com/zmkfirmware
-  - name: mctechnology17
-    url-base: https://github.com/mctechnology17
 
-    
   projects:
   - name: zmk
     remote: zmkfirmware
@@ -15,8 +12,5 @@ manifest:
     url: https://github.com/petejohanson/cirque-input-module
     revision: main
     path: modules/cirque-input-module
-  - name: zmk-nice-oled
-    remote: mctechnology17
-    revision: main
   self:
     path: config
