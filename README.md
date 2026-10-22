@@ -184,8 +184,9 @@ Left half (peripheral, display) — `config/mix_left.conf`:
 CONFIG_ZMK_DISPLAY=y
 CONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=y
 CONFIG_NICE_VIEW_GEM_PERIPHERAL_CENTRAL_RELAY=y
-CONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=y   # stop refreshing while idle (keeps last frame)
 ```
+
+Idle refresh stop (`CONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=y`) is set in `boards/shields/nice_view_gem/nice_view_gem.conf`, because shield `.conf` files are merged after the user config.
 
 ### Build targets
 
