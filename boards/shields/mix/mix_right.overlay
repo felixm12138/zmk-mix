@@ -71,7 +71,7 @@
         status = "okay";
         dr-gpios = <&gpio1 04 (GPIO_ACTIVE_HIGH)>;
 
-        // ADC sensitivity: "1x", "2x", "3x", "4x" (default "4x")
+        // ADC sensitivity: "1x", "2x", "3x", "4x" (driver default "1x"; 1x = most sensitive, 4x = least)
         sensitivity = MIX_CIRQUE_SENSITIVITY;
         // sleep;       // disabled — trackpad stays always-on
         // no-taps;     // disable tap-to-click (taps enabled by default)
