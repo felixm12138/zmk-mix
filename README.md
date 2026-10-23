@@ -7,13 +7,42 @@
 ![Controller](https://img.shields.io/badge/Controller-nice!nano%20v2-green)
 ![Studio](https://img.shields.io/badge/ZMK%20Studio-enabled-purple)
 
-**MIX** is a wireless split low-profile keyboard by **CUBE_STUDIO**. This repository contains its ZMK firmware: split-half builds, Cirque trackpad, rotary encoders, Bluetooth profiles and ZMK Studio.
+**MIX** is a wireless split low-profile keyboard by **CUBE_STUDIO**. This repository contains its ZMK firmware: split-half builds, Cirque trackpad, metal rollers (EC11 encoders), Bluetooth profiles and ZMK Studio.
 
-本仓库是 **CUBE_STUDIO MIX 无线分体矮轴键盘** 的 ZMK 固件，包含左右手固件、按键层、触控板、旋钮、蓝牙和 ZMK Studio 配置。
+本仓库是 **CUBE_STUDIO MIX 无线分体矮轴键盘** 的 ZMK 固件，包含左右手固件、按键层、触控板、滚轮、蓝牙和 ZMK Studio 配置。
 
-* 官网 / Store: [cubekb.com](https://cubekb.com)
+* 官网 / Website: [cubekb.com](https://cubekb.com) — 商店、使用说明、教程 / shop, user guides, tutorials
+* MIX 使用说明 / MIX user guide: [cubekb.com/wiki/products/mix](https://cubekb.com/wiki/products/mix)
 * 邮箱 / Email: [cubekb_studio@outlook.com](mailto:cubekb_studio@outlook.com)
 * QQ 群 / QQ group: **1037094476**
+
+---
+
+## 官方资源 / Official Resources
+
+购买、使用说明和各类教程都在工作室官网 [cubekb.com](https://cubekb.com)。本仓库只包含固件源码，日常使用请优先查看官网说明。
+
+Shop, user guides and tutorials all live on the studio website [cubekb.com](https://cubekb.com). This repository only holds the firmware source; for everyday use, start with the website.
+
+| 内容 Topic | 链接 Link |
+| --- | --- |
+| MIX 产品页（配置与购买） / Product page (options & purchase) | [shop/mix](https://cubekb.com/shop/mix) |
+| **MIX 使用说明 / MIX user guide** | [wiki/products/mix](https://cubekb.com/wiki/products/mix) |
+| · 快速上手 / Quick start | [#quick-start](https://cubekb.com/wiki/products/mix#quick-start) |
+| · 蓝牙连接 / Bluetooth | [#bluetooth](https://cubekb.com/wiki/products/mix#bluetooth) |
+| · 充电与电池 / Charging & battery | [#charging-and-battery](https://cubekb.com/wiki/products/mix#charging-and-battery) |
+| · 默认键位 / Default keymap | [#default-keymap](https://cubekb.com/wiki/products/mix#default-keymap) |
+| · 触控板与滚轮 / Touchpad & roller | [#touchpad-and-roller](https://cubekb.com/wiki/products/mix#touchpad-and-roller) |
+| · 改键 / Remapping | [#remapping](https://cubekb.com/wiki/products/mix#remapping) |
+| 刷机教程 / Flashing firmware | [guides/flash-firmware](https://cubekb.com/wiki/guides/flash-firmware) |
+| 蓝牙配对 / Bluetooth pairing | [guides/bluetooth](https://cubekb.com/wiki/guides/bluetooth) |
+| ZMK Studio 改键 / ZMK Studio | [guides/zmk-studio](https://cubekb.com/wiki/guides/zmk-studio) |
+| ZMK Keymap Editor + GitHub | [guides/zmk-keymap-editor](https://cubekb.com/wiki/guides/zmk-keymap-editor) |
+| 分体键盘基础 / Split keyboard basics | [guides/split-basics](https://cubekb.com/wiki/guides/split-basics) |
+| 故障排查 / Troubleshooting | [guides/troubleshooting](https://cubekb.com/wiki/guides/troubleshooting) |
+| 全部教程 / All guides | [wiki](https://cubekb.com/wiki) |
+| 定制服务 / Custom builds | [#custom](https://cubekb.com/#custom) |
+| 售后与保修 / Returns & warranty | [legal/returns](https://cubekb.com/legal/returns) |
 
 ---
 
@@ -21,7 +50,7 @@
 
 * ZMK `v0.3`, nice!nano v2 controllers, split targets `mix_left` / `mix_right`
 * Cirque trackpad on the right half ([geeksville driver](https://github.com/geeksville/cirque-input-module): level-triggered interrupts, chip shutdown in deep sleep)
-* EC11 rotary encoder on each half
+* Optional metal roller (EC11 encoder) on either half / 左右手可选金属滚轮
 * 5 Bluetooth profiles, dedicated Bluetooth layer
 * ZMK Studio (right half over USB)
 * Idle after 3 min, deep sleep after 15 min / 3 分钟进入空闲，15 分钟进入深度睡眠
@@ -55,6 +84,8 @@
 
 ## 刷机 / Flashing
 
+图文教程 / Illustrated guide: [刷机教程 Flashing firmware](https://cubekb.com/wiki/guides/flash-firmware)
+
 **进入刷机模式 / Enter the bootloader**
 
 * 同时按住 **Esc + Backspace + 拇指区 Space + Enter**（组合键），或快速双击控制器上的复位键。
@@ -81,6 +112,8 @@
 
 ![MIX keymap](doc/mix.svg)
 
+官网说明 / On the website: [默认键位 Default keymap](https://cubekb.com/wiki/products/mix#default-keymap)
+
 | 层 Layer | 名称 Name | 进入方式 Access | 内容 Contents |
 | --- | --- | --- | --- |
 | 0 | `Default` | — | 数字行 + QWERTY / Number row + QWERTY |
@@ -88,9 +121,9 @@
 | 2 | `layer 2` | 按住右手 `MO 2` / hold right `MO 2` | 上档符号 / Shifted symbols `! @ # … { } < > ?` |
 | 3 | `BT` | 按住右手底排 `Space`（RCtrl 左侧，单击为空格） / hold the right bottom-row `Space` next to RCtrl (tap = space) | 蓝牙配置 1–5、清除配对 / BT profiles 1–5, clear bonds |
 
-**旋钮 / Encoders**
+**滚轮 / Rollers**
 
-| 层 Layer | 左旋钮 Left | 右旋钮 Right |
+| 层 Layer | 左滚轮 Left | 右滚轮 Right |
 | --- | --- | --- |
 | 0 `Default` | 音量 / Volume | 滚动 / Scroll |
 | 1 `layer 1` | 音量 / Volume | 翻页 / Page Up · Down |
@@ -106,10 +139,10 @@
 **触控板 / Trackpad**
 
 * 按住第 1 或第 2 层时，触控板变为滚动 / On layers 1 and 2 the trackpad scrolls instead of moving the pointer.
-* 单击触控板为鼠标左键 / Tap to click.
+* 单击为鼠标左键，单击右上角区域为右键（[区域示意](https://cubekb.com/wiki/mix/touchpad-zones.svg)） / Tap = left click, tap the top-right zone = right click ([zone diagram](https://cubekb.com/wiki/mix/touchpad-zones.svg)).
 
-修改按键请编辑 `config/mix.keymap`，或在 USB 连接右手时使用 [ZMK Studio](https://zmk.studio)。
-Edit `config/mix.keymap`, or use [ZMK Studio](https://zmk.studio) with the right half connected over USB.
+修改按键请编辑 `config/mix.keymap`，或在 USB 连接右手时使用 [ZMK Studio](https://zmk.studio)（[教程](https://cubekb.com/wiki/guides/zmk-studio)）。也可以 fork 本仓库用 Keymap Editor 可视化修改（[教程](https://cubekb.com/wiki/guides/zmk-keymap-editor)）。
+Edit `config/mix.keymap`, or use [ZMK Studio](https://zmk.studio) with the right half connected over USB ([guide](https://cubekb.com/wiki/guides/zmk-studio)). You can also fork this repo and edit visually with Keymap Editor ([guide](https://cubekb.com/wiki/guides/zmk-keymap-editor)).
 
 ---
 
@@ -221,6 +254,8 @@ CONFIG_ZMK_STUDIO_LOCK_ON_DISCONNECT=n
 
 ## 常见问题 / Troubleshooting
 
+更多问题见官网 / More on the website: [故障排查 Troubleshooting](https://cubekb.com/wiki/guides/troubleshooting) · [蓝牙配对 Bluetooth pairing](https://cubekb.com/wiki/guides/bluetooth)
+
 * **蓝牙连接异常 / Bluetooth issues**：两边刷 `settings_reset`，删除电脑上的配对后重新配对。 / Flash `settings_reset` to both halves, remove the pairing on the host and pair again.
 * **左右手不通 / Halves not talking**：确认左右手刷的是同一分支、同一次构建的固件。 / Make sure both halves run firmware from the same branch and build.
 * **触控板太快或太慢 / Trackpad too fast or slow**：见「触控板调节」。 / See *Trackpad Tuning*.
@@ -229,7 +264,8 @@ CONFIG_ZMK_STUDIO_LOCK_ON_DISCONNECT=n
 
 ## 社区与支持 / Community & Support
 
-* 官网 / Store: [cubekb.com](https://cubekb.com)
+* 官网 / Website: [cubekb.com](https://cubekb.com) — 商店、使用说明、教程 / shop, user guides, tutorials
+* MIX 使用说明 / MIX user guide: [cubekb.com/wiki/products/mix](https://cubekb.com/wiki/products/mix)
 * 邮箱 / Email: [cubekb_studio@outlook.com](mailto:cubekb_studio@outlook.com)
 * QQ 群 / QQ group: **1037094476**
 
