@@ -24,7 +24,7 @@
 * EC11 rotary encoder on each half
 * 5 Bluetooth profiles, dedicated Bluetooth layer
 * ZMK Studio (right half over USB)
-* Idle after 7.5 min, deep sleep after 15 min / 7.5 分钟进入空闲，15 分钟进入深度睡眠
+* Idle after 3 min, deep sleep after 15 min / 3 分钟进入空闲，15 分钟进入深度睡眠
 
 ---
 
@@ -134,7 +134,7 @@ Shared options — `config/mix.conf`:
 CONFIG_EC11=y
 CONFIG_EC11_TRIGGER_GLOBAL_THREAD=y
 
-CONFIG_ZMK_IDLE_TIMEOUT=450000         # idle after 7.5 min
+CONFIG_ZMK_IDLE_TIMEOUT=180000         # idle after 3 min
 CONFIG_ZMK_SLEEP=y
 CONFIG_ZMK_IDLE_SLEEP_TIMEOUT=900000   # deep sleep after 15 min
 
