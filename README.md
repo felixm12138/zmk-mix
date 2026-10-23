@@ -13,7 +13,7 @@
 本仓库是 **CUBE_STUDIO MIX 无线分体矮轴键盘** 的 ZMK 固件，包含左右手固件、按键层、触控板、旋钮、蓝牙和 ZMK Studio 配置，并支持左手 nice!view 屏幕。
 
 * 官网 / Store: [cubekb.com](https://cubekb.com)
-* 邮箱 / Email: [cube_studio@qq.com](mailto:cube_studio@qq.com)
+* 邮箱 / Email: [cubekb_studio@outlook.com](mailto:cubekb_studio@outlook.com)
 * QQ 群 / QQ group: **1037094476**
 
 ---
@@ -247,7 +247,7 @@ Idle refresh stop (`CONFIG_ZMK_DISPLAY_BLANK_ON_IDLE=y`) is set in `boards/shiel
 ## 社区与支持 / Community & Support
 
 * 官网 / Store: [cubekb.com](https://cubekb.com)
-* 邮箱 / Email: [cube_studio@qq.com](mailto:cube_studio@qq.com)
+* 邮箱 / Email: [cubekb_studio@outlook.com](mailto:cubekb_studio@outlook.com)
 * QQ 群 / QQ group: **1037094476**
 
 欢迎加群或发邮件交流编译、固件和改装问题。 / Join the group or email us for build help, firmware discussion and customization.
