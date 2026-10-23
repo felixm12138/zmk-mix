@@ -25,7 +25,7 @@
 * EC11 rotary encoder on each half
 * 5 Bluetooth profiles, dedicated Bluetooth layer
 * ZMK Studio (right half over USB)
-* Idle after 7.5 min, deep sleep after 15 min / 7.5 分钟进入空闲，15 分钟进入深度睡眠
+* Idle after 3 min, deep sleep after 15 min / 3 分钟进入空闲，15 分钟进入深度睡眠
 * Left-half nice!view screen: battery of both halves, BT profile, layer name, Caps Lock / 左手 nice!view 屏幕：两边电量、蓝牙配置、层名、大写状态
 
 ---
@@ -71,7 +71,7 @@ Requires a [nice!view](https://nicekeyboards.com/nice-view) fitted on the **left
 | 底部 Bottom | 5 个蓝牙配置（实心为当前）、当前层名 / 5 BT profile slots (filled = active), current layer name |
 
 * 屏幕只在状态变化时刷新，状态转发不增加额外蓝牙通信 / The screen redraws only on state changes; relaying adds no extra Bluetooth traffic.
-* 左手闲置 7.5 分钟后停止刷新以省电，画面保留最后一帧；按左手任意键或转动左旋钮即恢复 / After 7.5 min without left-half input the screen stops refreshing to save power and keeps the last frame; any left-half key or encoder turn resumes it.
+* 左手闲置 3 分钟后停止刷新以省电，画面保留最后一帧；按左手任意键或转动左旋钮即恢复 / After 3 min without left-half input the screen stops refreshing to save power and keeps the last frame; any left-half key or encoder turn resumes it.
 * 未焊屏幕时请使用 `main` 分支，否则左手会白白多耗电 / Without a screen, use `main` — the display firmware still runs and costs battery.
 * 屏幕界面代码位于 `boards/shields/nice_view_gem/`，可自行修改 / Screen layout lives in `boards/shields/nice_view_gem/` and can be customized.
 
@@ -158,7 +158,7 @@ Shared options — `config/mix.conf`:
 CONFIG_EC11=y
 CONFIG_EC11_TRIGGER_GLOBAL_THREAD=y
 
-CONFIG_ZMK_IDLE_TIMEOUT=450000         # idle after 7.5 min
+CONFIG_ZMK_IDLE_TIMEOUT=180000         # idle after 3 min
 CONFIG_ZMK_SLEEP=y
 CONFIG_ZMK_IDLE_SLEEP_TIMEOUT=900000   # deep sleep after 15 min
 
