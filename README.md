@@ -148,6 +148,28 @@ Edit `config/mix.keymap`, or use [ZMK Studio](https://zmk.studio) with the right
 | `MIX_SCROLL_SPEED_NUM / DEN` | `1 / 30` | 滚动速度倍率，嫌慢可改为 `1 / 10` / Scroll speed (e.g. `1 / 10` for faster) |
 | `MIX_SCROLL_LAYERS` | `1 2` | 触控板变为滚动的层 / Layers on which the trackpad scrolls |
 
+### 省电：开启触控板休眠 / Power saving: trackpad sleep
+
+触控板芯片默认不休眠，手指没放上去时也耗电约 **1.7 mA**，约占右手工作耗电的四分之三。开启芯片自带的休眠后，手指离开约 5 秒即降到约 **40 µA**，右手续航大约可以翻倍（按每天使用 8 小时估算，从约 2 个多月提高到约 4 个多月，1500 mAh 电池）。
+
+The trackpad chip does not sleep by default and draws about **1.7 mA** even with no finger on it — roughly three quarters of the right half's awake current. With the chip's own sleep mode enabled it drops to about **40 µA** after ~5 s without touch, which roughly doubles right-half battery life (about 2 → 4+ months at 8 h/day with a 1500 mAh battery).
+
+开启方法：编辑 `boards/shields/mix/mix_right.overlay`，去掉 `sleep;` 前的注释。
+To enable it, uncomment `sleep;` in `boards/shields/mix/mix_right.overlay`:
+
+```dts
+glidepoint: glidepoint@0 {
+    ...
+    sleep;          // enable chip sleep mode
+};
+```
+
+> 代价：触控板静置几秒后，再次触碰的第一下会有轻微延迟。默认关闭，按个人习惯选择。
+> Trade-off: after the pad has been untouched for a few seconds, the first touch responds with a short delay. Disabled by default — choose what suits you.
+>
+> 无论是否开启，键盘深度睡眠（15 分钟无操作）时驱动都会让触控板芯片完全关断（约 0.23 µA）。
+> Either way, the driver fully shuts the trackpad chip down (≈0.23 µA) when the keyboard enters deep sleep after 15 min.
+
 ---
 
 ## 固件配置 / Firmware Configuration
