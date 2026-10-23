@@ -47,6 +47,20 @@ Shop, user guides and tutorials all live on the studio website [cubekb.com](http
 
 ---
 
+## 固件版本 / Firmware Editions
+
+MIX 有三种固件，按购买时选择的配置使用对应的仓库。 / MIX ships with one of three firmwares — use the repository that matches your configuration.
+
+| 版本 Edition | 仓库 Repository | 连接 Connection | 主控 Controller | 触控板 Touchpad | 改键 Remapping |
+| --- | --- | --- | --- | --- | --- |
+| ZMK | [zmk-mix](https://github.com/felixm12138/zmk-mix) | 无线 BLE + USB / Wireless | nRF52840 | ✓ | ZMK Studio |
+| QMK + Vial | [qmk-vial-mix](https://github.com/felixm12138/qmk-vial-mix) | 有线 USB / Wired | RP2040 | ✓ | Vial |
+| RMK | [rmk_mix](https://github.com/felixm12138/rmk_mix) | 无线 BLE + USB / Wireless | nRF52840 | — | Vial |
+
+三个版本的默认键位一致。 / All three share the same default keymap.
+
+---
+
 ## 功能特性 / Features
 
 * ZMK `v0.3`, nice!nano v2 controllers, split targets `mix_left` / `mix_right`
