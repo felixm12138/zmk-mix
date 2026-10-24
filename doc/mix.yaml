@@ -51,14 +51,14 @@ layers:
   - RSHFT
   - LCTRL
   - MUTE
-  - LEFT ALT
+  - LALT
   - LGUI
   - layer 1
   - SPACE
   - ENTER
   - layer 2
-  - LEFT WIN
-  - RIGHT ALT
+  - RGUI
+  - RALT
   - {t: SPACE, h: BT}
   - RCTRL
   layer 1:
